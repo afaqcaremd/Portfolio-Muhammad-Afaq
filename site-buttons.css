@@ -1,0 +1,36 @@
+/* Portfolio action buttons — up arrow with hover rotation */
+.btn-hero-primary,
+.btn-hero-ghost,
+.btn-view-demo,
+.btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-hero-primary::after,
+.btn-hero-ghost::after,
+.btn-view-demo::after,
+.btn-cta::after {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    content: "\f062";
+    font-size: 0.8em;
+    line-height: 1;
+    display: inline-block;
+    transition: transform 0.25s ease;
+    transform: rotate(75deg);
+    margin-left: 0.1rem;
+}
+
+.btn-hero-primary:hover::after,
+.btn-hero-ghost:hover::after,
+.btn-view-demo:hover::after,
+.btn-cta:hover::after,
+.btn-hero-primary:focus-visible::after,
+.btn-hero-ghost:focus-visible::after,
+.btn-view-demo:focus-visible::after,
+.btn-cta:focus-visible::after {
+    transform: rotate(45deg);
+}

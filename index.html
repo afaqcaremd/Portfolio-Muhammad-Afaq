@@ -10,13 +10,18 @@
     <!-- End Google Tag Manager -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Muhammad Afaq — Full-Stack Java & Angular Developer. Portfolio showcasing enterprise healthcare, ERP, POS, and educational management systems.">
-    <meta property="og:title" content="Muhammad Afaq — Full-Stack Java & Angular Developer">
+    <meta name="description" content="Muhammad Afaq, Full Stack Java and Angular Developer. Portfolio showcasing enterprise healthcare, ERP, POS, and educational management systems.">
+    <meta property="og:title" content="Muhammad Afaq | Full Stack Java and Angular Developer">
     <meta property="og:description" content="Portfolio of Muhammad Afaq, Full-Stack Developer specializing in Java Spring Boot & Angular enterprise applications.">
-    <title>Muhammad Afaq — Full-Stack Developer</title>
+    <title>Muhammad Afaq | Full Stack Developer</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="site-nav.css" rel="stylesheet">
+    <link href="typography.css" rel="stylesheet">
+    <link href="sticky-social.css" rel="stylesheet">
+    <link href="site-buttons.css" rel="stylesheet">
+    <link href="site-marquee.css" rel="stylesheet">
+    <link href="site-footer.css" rel="stylesheet">
     <style>
         :root {
             --body-bg: #f8fafc;
@@ -34,38 +39,15 @@
         .theme-wellness   { --p1: #16a34a; --p2: #14532d; }
         .theme-marketing  { --p1: #9b2226; --p2: #6a0572; }
 
-        html { scroll-behavior: smooth; }
+        html { scroll-behavior: smooth; overflow-x: hidden; }
+        #about, #experience, #projects, #skills, #contact,
+        [id^="project-"] { scroll-margin-top: 5.5rem; }
 
         body {
-            font-family: 'Inter', sans-serif;
             background-color: var(--body-bg);
             color: var(--text-dark);
-        }
-
-        /* ===== NAVBAR ===== */
-        .navbar {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            box-shadow: 0 2px 20px rgba(0,0,0,0.2);
-            padding: 0.9rem 0;
-        }
-        .navbar-brand {
-            font-weight: 800;
-            font-size: 1.2rem;
-            color: white !important;
-            letter-spacing: -0.5px;
-        }
-        .navbar-brand .accent { color: #60a5fa; }
-        .nav-link {
-            color: rgba(255,255,255,0.75) !important;
-            font-weight: 500;
-            font-size: 0.875rem;
-            padding: 0.45rem 0.9rem !important;
-            border-radius: 8px;
-            transition: all 0.2s;
-        }
-        .nav-link:hover {
-            color: white !important;
-            background: rgba(255,255,255,0.08);
+            overflow-x: hidden;
+            max-width: 100vw;
         }
 
         /* ===== HERO ===== */
@@ -95,20 +77,13 @@
             border-radius: 50%;
             pointer-events: none;
         }
-        .hero-greeting {
-            font-size: 0.9rem;
-            color: #93c5fd;
-            font-weight: 600;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            margin-bottom: 0.75rem;
-        }
-        .hero-name {
+        .hero-title {
             font-size: 3.75rem;
             font-weight: 800;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             letter-spacing: -1.5px;
             line-height: 1.1;
+            color: white;
         }
         .hero-role {
             font-size: 1.25rem;
@@ -137,6 +112,22 @@
             font-weight: 500;
         }
         .hero-chip i { color: #60a5fa; font-size: 0.8rem; }
+        .hero-chip .chip-value {
+            display: block;
+            font-weight: 700;
+            color: white;
+            font-size: 0.95rem;
+            line-height: 1.2;
+        }
+        .hero-chip .chip-label {
+            display: block;
+            font-size: 0.7rem;
+            color: rgba(255,255,255,0.55);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+        }
+        .hero-chip .chip-mobile { display: none; }
         .hero-actions {
             display: flex;
             justify-content: center;
@@ -544,6 +535,29 @@
             padding: 5rem 0;
             background: var(--body-bg);
         }
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            max-width: 960px;
+            margin: 0 auto;
+        }
+        @media (max-width: 576px) {
+            .skills-grid {
+                gap: 0.85rem;
+                max-width: 100%;
+            }
+            .skills-section .skill-card {
+                padding: 1.25rem 1rem;
+            }
+            .skills-section .skill-card-title {
+                font-size: 0.9rem;
+            }
+            .skills-section .skill-pill {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.55rem;
+            }
+        }
         .skill-card {
             background: white;
             border-radius: 20px;
@@ -585,104 +599,52 @@
             border: 1px solid #e2e8f0;
         }
 
-        /* ===== CONTACT ===== */
-        .contact-section {
-            padding: 5rem 0;
-            background: white;
-        }
-        .contact-card {
-            background: linear-gradient(140deg, #0f172a 0%, #1e3a5f 60%, #0f3460 100%);
-            color: white;
-            border-radius: 26px;
-            padding: 4rem 3rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .contact-card::before {
-            content: '';
-            position: absolute;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(96,165,250,0.09) 0%, transparent 70%);
-            top: -150px; right: -80px;
-            border-radius: 50%;
-            pointer-events: none;
-        }
-        .contact-heading {
-            font-size: 2.1rem;
-            font-weight: 800;
-            margin-bottom: 0.75rem;
-            position: relative;
-        }
-        .contact-desc {
-            color: rgba(255,255,255,0.65);
-            font-size: 1.05rem;
-            margin-bottom: 2.5rem;
-            max-width: 520px;
-            margin-left: auto;
-            margin-right: auto;
-            position: relative;
-        }
-        .contact-btns {
-            display: flex;
-            justify-content: center;
-            gap: 0.875rem;
-            flex-wrap: wrap;
-            position: relative;
-        }
-        .btn-cta {
-            padding: 0.8rem 1.75rem;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 0.875rem;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.25s;
-            border: none;
-        }
-        .btn-cta-email   { background: #2563eb; color: white; }
-        .btn-cta-email:hover { background: #1d4ed8; color: white; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,99,235,0.45); }
-        .btn-cta-linkedin { background: #0077b5; color: white; }
-        .btn-cta-linkedin:hover { background: #005e8a; color: white; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0,119,181,0.45); }
-        .btn-cta-github  { background: rgba(255,255,255,0.1); color: white; border: 1.5px solid rgba(255,255,255,0.25); }
-        .btn-cta-github:hover { background: rgba(255,255,255,0.18); color: white; transform: translateY(-2px); }
-        .btn-cta-whatsapp { background: #25d366; color: white; }
-        .btn-cta-whatsapp:hover { background: #1da851; color: white; transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37,211,102,0.45); }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            background: linear-gradient(135deg, #0f172a, #1e293b);
-            color: rgba(255,255,255,0.55);
-            padding: 2rem 0;
-            text-align: center;
-            font-size: 0.85rem;
-        }
-        .footer-social {
-            display: flex;
-            justify-content: center;
-            gap: 1.25rem;
-            margin-bottom: 0.75rem;
-        }
-        .footer-social a {
-            color: rgba(255,255,255,0.5);
-            font-size: 1.15rem;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-        .footer-social a:hover { color: #60a5fa; }
-        .footer strong { color: rgba(255,255,255,0.85); }
-
         /* ===== RESPONSIVE ===== */
         @media (max-width: 992px) {
-            .hero-name { font-size: 2.75rem; }
+            .hero-title { font-size: 2.75rem; }
+        }
+        @media (max-width: 768px) {
+            .hero-chip .chip-desktop { display: none !important; }
+            .hero-chip .chip-mobile { display: flex !important; flex-direction: column; }
+            .hero-section::before,
+            .hero-section::after { display: none; }
+            .hero-section { padding: 4rem 0 3.5rem; }
+            .hero-title { font-size: 2.25rem; }
+            .hero-role { font-size: 1rem; padding: 0 0.5rem; }
+            .hero-chips {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.65rem;
+                max-width: 100%;
+                padding: 0 0.25rem;
+            }
+            .hero-chip {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+                border-radius: 12px;
+                border: 1px solid rgba(255,255,255,0.12);
+                border-left: 3px solid #60a5fa;
+                background: rgba(15,23,42,0.45);
+                padding: 0.75rem 0.85rem;
+                gap: 0.35rem;
+            }
+            .hero-chip i {
+                font-size: 0.95rem;
+                margin-bottom: 0.15rem;
+            }
+            .hero-actions { flex-direction: column; align-items: stretch; padding: 0 0.5rem; }
+            .hero-actions a { justify-content: center; }
+            .caremd-modules .caremd-module-title,
+            .rynodesk-modules .rynodesk-module-title { white-space: normal; }
+            .project-header, .project-body { padding: 1.35rem; }
+            .exp-top, .exp-body { padding: 1.35rem; }
+            .container { padding-left: 1rem; padding-right: 1rem; }
         }
         @media (max-width: 576px) {
-            .hero-name { font-size: 2.1rem; }
+            .hero-title { font-size: 2rem; }
             .section-heading { font-size: 1.75rem; }
-            .contact-card { padding: 2.5rem 1.5rem; }
-            .contact-heading { font-size: 1.65rem; }
+            .hero-chips { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -692,38 +654,18 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- ===== NAVBAR ===== -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">
-                <i class="fas fa-code me-2"></i>Muhammad <span class="accent">Afaq</span>
-            </a>
-            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto gap-1">
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <div id="site-nav"></div>
 
     <!-- ===== HERO ===== -->
     <section class="hero-section">
         <div class="container position-relative">
-            <p class="hero-greeting">Full-Stack Developer</p>
-            <h1 class="hero-name">Muhammad Afaq</h1>
-            <p class="hero-role">Specializing in <strong>Java Spring Boot</strong> &amp; <strong>Angular</strong> Enterprise Applications</p>
+            <h1 class="hero-title">Full Stack Developer</h1>
+            <p class="hero-role">I build production apps with <strong>Java Spring Boot</strong> and <strong>Angular</strong> for healthcare, ERP, and retail teams.</p>
             <div class="hero-chips">
-                <span class="hero-chip"><i class="fas fa-briefcase"></i> 3+ Years Experience</span>
-                <span class="hero-chip"><i class="fas fa-layer-group"></i> 7 Projects Delivered</span>
-                <span class="hero-chip"><i class="fas fa-building"></i> CareMD — Current</span>
-                <span class="hero-chip"><i class="fas fa-map-marker-alt"></i> Pakistan</span>
+                <span class="hero-chip"><i class="fas fa-briefcase"></i><span class="chip-desktop">3+ Years Experience</span><span class="chip-mobile"><span class="chip-value">3+ Years</span><span class="chip-label">Experience</span></span></span>
+                <span class="hero-chip"><i class="fas fa-layer-group"></i><span class="chip-desktop">7 Projects Delivered</span><span class="chip-mobile"><span class="chip-value">7 Projects</span><span class="chip-label">Delivered</span></span></span>
+                <span class="hero-chip"><i class="fas fa-building"></i><span class="chip-desktop">CareMD, Current</span><span class="chip-mobile"><span class="chip-value">CareMD</span><span class="chip-label">Current Role</span></span></span>
+                <span class="hero-chip"><i class="fas fa-map-marker-alt"></i><span class="chip-desktop">Pakistan</span><span class="chip-mobile"><span class="chip-value">Pakistan</span><span class="chip-label">Based In</span></span></span>
             </div>
             <div class="hero-actions">
                 <a href="#projects" class="btn-hero-primary">
@@ -747,10 +689,10 @@
                     <p class="section-eyebrow">About Me</p>
                     <h2 class="section-heading" style="margin-bottom:1rem;">Building Enterprise Software That Scales</h2>
                     <p class="about-text">
-                        I'm a <strong>Full-Stack Java &amp; Angular Developer</strong> with hands-on experience building and delivering production-grade enterprise applications — from ERP systems and POS platforms to healthcare SaaS products.
+                        I'm a <strong>full stack Java and Angular developer</strong> with hands on experience shipping real enterprise software. My work spans ERP systems, POS platforms, and healthcare SaaS products used in production.
                     </p>
                     <p class="about-text mt-3">
-                        Starting at <strong>SecopTech</strong>, I worked across multiple products including ERP migration, a Point-of-Sale system with marketplace integration, and a care management platform. I then joined <strong>CareMD</strong>, where I built a full medical practice management system from scratch — handling architecture, backend, frontend, and database design under the guidance of my project manager.
+                        I started at <strong>SecopTech</strong>, contributing to ERP migration, a POS product with marketplace integration, and a care management platform. I later joined <strong>CareMD</strong>, where I built a medical practice management system from the ground up. I owned architecture, backend APIs, Angular UI, and database design with guidance from my project manager.
                     </p>
                 </div>
                 <div class="col-lg-6">
@@ -795,7 +737,7 @@
             <div class="text-center">
                 <p class="section-eyebrow">Career Journey</p>
                 <h2 class="section-heading">Professional Experience</h2>
-                <p class="section-sub">From enterprise ERP migration to building a full healthcare SaaS platform — growing through every project.</p>
+                <p class="section-sub">From ERP migration work to building a healthcare SaaS platform. Each project pushed my skills further.</p>
             </div>
 
             <div class="row g-4 align-items-stretch">
@@ -806,10 +748,10 @@
                         <div class="exp-top exp-top-secoptech">
                             <div class="exp-top-row">
                                 <div class="exp-icon"><i class="fas fa-building"></i></div>
-                                <span style="background:rgba(255,255,255,0.15);color:white;padding:0.25rem 0.8rem;border-radius:50px;font-size:0.72rem;font-weight:700;border:1px solid rgba(255,255,255,0.25);">First Role</span>
+                                <span style="background:rgba(255,255,255,0.15);color:white;padding:0.25rem 0.8rem;border-radius:50px;font-size:0.72rem;border:1px solid rgba(255,255,255,0.25);">First Role</span>
                             </div>
                             <div class="exp-company">SecopTech</div>
-                            <div class="exp-role">Software Engineer &mdash; Full-Stack</div>
+                            <div class="exp-role">Software Engineer, Full Stack</div>
                             <div class="exp-chips">
                                 <span class="exp-chip"><i class="fas fa-briefcase"></i> 5 Products</span>
                                 <span class="exp-chip"><i class="fas fa-map-marker-alt"></i> Pakistan</span>
@@ -819,7 +761,7 @@
                         <div class="exp-body">
                             <ul class="exp-highlights">
                                 <li><span class="exp-check"><i class="fas fa-check"></i></span>Migrated Chiltan Pure ERP from legacy system to modern Spring Boot + Angular stack</li>
-                                <li><span class="exp-check"><i class="fas fa-check"></i></span>Major contributor to RynoDesk POS — worked on almost every module including inventory, billing, and marketplace</li>
+                                <li><span class="exp-check"><i class="fas fa-check"></i></span>Major contributor to RynoDesk POS, working across inventory, billing, marketplace, and related modules</li>
                                 <li><span class="exp-check"><i class="fas fa-check"></i></span>Built backend CRUDs and Angular UI components across multiple products</li>
                                 <li><span class="exp-check"><i class="fas fa-check"></i></span>Contributed modules to Carer care management and WellnessNow microservices platform</li>
                                 <li><span class="exp-check"><i class="fas fa-check"></i></span>Wrote Liquibase database migration scripts and integrated Swagger API documentation</li>
@@ -845,7 +787,7 @@
                                 <span class="current-pill"><i class="fas fa-circle" style="font-size:0.45rem;"></i> Current</span>
                             </div>
                             <div class="exp-company">CareMD</div>
-                            <div class="exp-role">Software Engineer &mdash; Full-Stack (Primary Developer)</div>
+                            <div class="exp-role">Software Engineer, Full Stack (Primary Developer)</div>
                             <div class="exp-chips">
                                 <span class="exp-chip"><i class="fas fa-star"></i> 90%+ Solo Built</span>
                                 <span class="exp-chip"><i class="fas fa-map-marker-alt"></i> Pakistan</span>
@@ -856,7 +798,7 @@
                             <ul class="exp-highlights">
                                 <li><span class="exp-check"><i class="fas fa-check"></i></span>Built the entire CareMD medical practice management platform from scratch as the primary developer</li>
                                 <li><span class="exp-check"><i class="fas fa-check"></i></span>Designed and implemented multi-tenant SaaS architecture with full data isolation per practice</li>
-                                <li><span class="exp-check"><i class="fas fa-check"></i></span>Responsible for 90%+ of the codebase — backend APIs, Angular frontend, and database schema</li>
+                                <li><span class="exp-check"><i class="fas fa-check"></i></span>Responsible for 90%+ of the codebase, including backend APIs, Angular frontend, and database schema</li>
                                 <li><span class="exp-check"><i class="fas fa-check"></i></span>Delivered 58+ domain entities, 136+ Flyway migrations, and real-time WebSocket messaging</li>
                                 <li><span class="exp-check"><i class="fas fa-check"></i></span>Working under mentorship and guidance of project manager to deliver production-grade quality</li>
                             </ul>
@@ -884,7 +826,7 @@
             </div>
 
             <!-- ── CareMD ── -->
-            <div class="project-card theme-caremd">
+            <div id="project-caremd" class="project-card theme-caremd">
                 <div class="project-header">
                     <div class="project-header-top">
                         <div class="project-icon-wrap"><i class="fas fa-hospital-alt"></i></div>
@@ -893,8 +835,8 @@
                             <span class="badge-company">CareMD</span>
                         </div>
                     </div>
-                    <div class="project-name">CareMD — Medical Practice Management</div>
-                    <div class="project-tagline">Enterprise Multi-Tenant SaaS — Billing, HR, Assets, Access &amp; Reports</div>
+                    <div class="project-name">CareMD Medical Practice Management</div>
+                    <div class="project-tagline">Enterprise multi tenant SaaS for billing, HR, assets, access, and reports</div>
                     <div class="tech-badges">
                         <span class="tech-badge">Java 17</span>
                         <span class="tech-badge">Spring Boot 3.2</span>
@@ -911,7 +853,7 @@
                         <div class="col-md-8">
                             <p class="project-section-label">Overview</p>
                             <p style="font-size:0.9rem;color:#475569;line-height:1.7;margin-bottom:1.25rem;">
-                                Built the entire CareMD platform from scratch as primary developer — a multi-tenant medical billing and practice-management SaaS spanning six application areas: Clinical/RCM, HR Operations, Assets, Access Control, Reports, and Notifications. Spring Boot REST API, Angular lazy-loaded modules, PostgreSQL with 136+ Flyway migrations.
+                                I built the CareMD platform from scratch as the primary developer. It is a multi tenant medical billing and practice management SaaS with six main areas: clinical and RCM, HR operations, assets, access control, reports, and notifications. Stack includes Spring Boot REST APIs, Angular lazy loaded modules, and PostgreSQL with 136+ Flyway migrations.
                             </p>
                             <p class="project-section-label">Platform Modules</p>
                             <ul class="feature-list caremd-modules">
@@ -953,7 +895,7 @@
             </div>
 
             <!-- ── RynoDesk ── -->
-            <div class="project-card theme-rynodesk">
+            <div id="project-rynodesk" class="project-card theme-rynodesk">
                 <div class="project-header">
                     <div class="project-header-top">
                         <div class="project-icon-wrap"><i class="fas fa-cash-register"></i></div>
@@ -962,7 +904,7 @@
                             <span class="badge-company">SecopTech</span>
                         </div>
                     </div>
-                    <div class="project-name">RynoDesk — POS &amp; E-commerce Platform</div>
+                    <div class="project-name">RynoDesk POS and E commerce Platform</div>
                     <div class="project-tagline">POS, Inventory, Marketplace Sync &amp; Electron Desktop</div>
                     <div class="tech-badges">
                         <span class="tech-badge">Spring Boot 3.2</span>
@@ -979,7 +921,7 @@
                         <div class="col-md-8">
                             <p class="project-section-label">Overview</p>
                             <p style="font-size:0.9rem;color:#475569;line-height:1.7;margin-bottom:1.25rem;">
-                                Major contributor on RynoDesk — retail POS and e-commerce platform. Worked across sales, inventory, products, finance, and integrations (web + desktop).
+                                I was a major contributor on RynoDesk, a retail POS and e commerce platform. My work covered sales, inventory, products, finance, and integrations on web and desktop.
                             </p>
                             <p class="project-section-label">Platform Areas</p>
                             <ul class="feature-list rynodesk-modules">
@@ -1021,16 +963,16 @@
             </div>
 
             <!-- ── AutoSchedula ── -->
-            <div class="project-card theme-autoschedula">
+            <div id="project-autoschedula" class="project-card theme-autoschedula">
                 <div class="project-header">
                     <div class="project-header-top">
                         <div class="project-icon-wrap"><i class="fas fa-graduation-cap"></i></div>
                         <div class="project-header-badges">
-                            <span class="badge-contribution">Final Year Project — 100% Solo</span>
+                            <span class="badge-contribution">Final Year Project, 100% Solo</span>
                             <span class="badge-company">Academic</span>
                         </div>
                     </div>
-                    <div class="project-name">AutoSchedula — Automated Timetable System</div>
+                    <div class="project-name">AutoSchedula Automated Timetable System</div>
                     <div class="project-tagline">AI-Powered Educational Scheduling Engine with Conflict Resolution</div>
                     <div class="tech-badges">
                         <span class="tech-badge">Spring Boot 3.2</span>
@@ -1046,7 +988,7 @@
                         <div class="col-md-8">
                             <p class="project-section-label">Overview</p>
                             <p style="font-size:0.9rem;color:#475569;line-height:1.7;margin-bottom:1.25rem;">
-                                My Final Year Project, built entirely by me. AutoSchedula solves the complex problem of educational timetable generation using a constraint-satisfaction and genetic algorithm engine — eliminating scheduling conflicts and optimizing resource allocation across teachers, sections, and rooms.
+                                My final year project, built entirely by me. AutoSchedula automates school timetable generation using constraint solving and a genetic algorithm. It reduces scheduling conflicts and balances teachers, sections, and rooms.
                             </p>
                             <p class="project-section-label">Key Features</p>
                             <ul class="feature-list">
@@ -1080,16 +1022,16 @@
             </div>
 
             <!-- ── Chiltan Pure ERP ── -->
-            <div class="project-card theme-erp">
+            <div id="project-erp" class="project-card theme-erp">
                 <div class="project-header">
                     <div class="project-header-top">
                         <div class="project-icon-wrap"><i class="fas fa-sitemap"></i></div>
                         <div class="project-header-badges">
-                            <span class="badge-contribution">First Role — Migration &amp; Enhancement</span>
+                            <span class="badge-contribution">First Role, Migration and Enhancement</span>
                             <span class="badge-company">SecopTech</span>
                         </div>
                     </div>
-                    <div class="project-name">Chiltan Pure ERP — Business Management System</div>
+                    <div class="project-name">Chiltan Pure ERP Business Management System</div>
                     <div class="project-tagline">Legacy-to-Modern ERP Migration with New Module Development</div>
                     <div class="tech-badges">
                         <span class="tech-badge">Spring Boot 2.1</span>
@@ -1140,7 +1082,7 @@
             </div>
 
             <!-- ── Carer ── -->
-            <div class="project-card theme-carer">
+            <div id="project-carer" class="project-card theme-carer">
                 <div class="project-header">
                     <div class="project-header-top">
                         <div class="project-icon-wrap"><i class="fas fa-hand-holding-heart"></i></div>
@@ -1149,7 +1091,7 @@
                             <span class="badge-company">SecopTech</span>
                         </div>
                     </div>
-                    <div class="project-name">Carer — Care Management System</div>
+                    <div class="project-name">Carer Care Management System</div>
                     <div class="project-tagline">Healthcare Provider Platform with Modern Angular 20 Frontend</div>
                     <div class="tech-badges">
                         <span class="tech-badge">Spring Boot</span>
@@ -1165,7 +1107,7 @@
                         <div class="col-md-8">
                             <p class="project-section-label">Overview</p>
                             <p style="font-size:0.9rem;color:#475569;line-height:1.7;margin-bottom:1.25rem;">
-                                Contributed to the Carer platform at SecopTech — a care management solution for healthcare providers. Worked on specific modules including role-based access features, UI components, and data management screens using the latest Angular 20 and modern Spring Boot stack.
+                                I contributed to the Carer platform at SecopTech, a care management product for healthcare providers. My work included role based access, UI screens, and data management modules using Angular 20 and Spring Boot.
                             </p>
                             <p class="project-section-label">Contributions</p>
                             <ul class="feature-list">
@@ -1198,7 +1140,7 @@
             </div>
 
             <!-- ── WellnessNow ── -->
-            <div class="project-card theme-wellness">
+            <div id="project-wellness" class="project-card theme-wellness">
                 <div class="project-header">
                     <div class="project-header-top">
                         <div class="project-icon-wrap"><i class="fas fa-heartbeat"></i></div>
@@ -1207,7 +1149,7 @@
                             <span class="badge-company">SecopTech</span>
                         </div>
                     </div>
-                    <div class="project-name">WellnessNow — Microservices Healthcare Platform</div>
+                    <div class="project-name">WellnessNow Microservices Healthcare Platform</div>
                     <div class="project-tagline">Spring Cloud Microservices with Service Discovery &amp; API Gateway</div>
                     <div class="tech-badges">
                         <span class="tech-badge">Spring Cloud</span>
@@ -1257,7 +1199,7 @@
             </div>
 
             <!-- ── Chiltan Marketing ── -->
-            <div class="project-card theme-marketing">
+            <div id="project-marketing" class="project-card theme-marketing">
                 <div class="project-header">
                     <div class="project-header-top">
                         <div class="project-icon-wrap"><i class="fas fa-bullhorn"></i></div>
@@ -1266,7 +1208,7 @@
                             <span class="badge-company">SecopTech</span>
                         </div>
                     </div>
-                    <div class="project-name">Chiltan Marketing — E-Marketing Platform</div>
+                    <div class="project-name">Chiltan Marketing E Marketing Platform</div>
                     <div class="project-tagline">Email Campaign Builder with Advanced Analytics &amp; Data Visualization</div>
                     <div class="tech-badges">
                         <span class="tech-badge">Angular 14</span>
@@ -1323,8 +1265,7 @@
                 <h2 class="section-heading">Technical Skills</h2>
                 <p class="section-sub">Full-stack capabilities across enterprise Java backends, Angular frontends, and relational databases.</p>
             </div>
-            <div class="row g-4">
-                <div class="col-md-6 col-lg-3">
+            <div class="skills-grid">
                     <div class="skill-card">
                         <div class="skill-icon-box bg-blue"><i class="fas fa-server"></i></div>
                         <div class="skill-card-title">Backend Development</div>
@@ -1344,13 +1285,11 @@
                             <span class="skill-pill">WebSocket</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
                     <div class="skill-card">
                         <div class="skill-icon-box bg-purple"><i class="fas fa-laptop-code"></i></div>
                         <div class="skill-card-title">Frontend Development</div>
                         <div class="skill-pills">
-                            <span class="skill-pill">Angular 12–20</span>
+                            <span class="skill-pill">Angular 12 to 20</span>
                             <span class="skill-pill">TypeScript</span>
                             <span class="skill-pill">JavaScript</span>
                             <span class="skill-pill">HTML5 / CSS3</span>
@@ -1364,8 +1303,6 @@
                             <span class="skill-pill">Electron.js</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
                     <div class="skill-card">
                         <div class="skill-icon-box bg-green"><i class="fas fa-database"></i></div>
                         <div class="skill-card-title">Database &amp; Storage</div>
@@ -1379,8 +1316,6 @@
                             <span class="skill-pill">JPA Relationships</span>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
                     <div class="skill-card">
                         <div class="skill-icon-box bg-orange"><i class="fas fa-tools"></i></div>
                         <div class="skill-card-title">Tools &amp; Practices</div>
@@ -1397,48 +1332,16 @@
                             <span class="skill-pill">QR / Barcode</span>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </section>
 
-    <!-- ===== CONTACT ===== -->
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <div class="contact-card">
-                <h2 class="contact-heading">Let's Work Together</h2>
-                <p class="contact-desc">Open to new opportunities, freelance projects, and collaborations. Feel free to reach out!</p>
-                <div class="contact-btns">
-                    <a href="mailto:afaqch5535@gmail.com" class="btn-cta btn-cta-email">
-                        <i class="fas fa-envelope"></i> afaqch5535@gmail.com
-                    </a>
-                    <a href="https://wa.me/923021005535" target="_blank" rel="noopener" class="btn-cta btn-cta-whatsapp" title="Chat on WhatsApp">
-                        <i class="fab fa-whatsapp"></i> 0302 1005535
-                    </a>
-                    <a href="https://www.linkedin.com/in/afaq-springboot-angular" target="_blank" rel="noopener" class="btn-cta btn-cta-linkedin">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
-                    <a href="https://github.com/afaq-codes" target="_blank" rel="noopener" class="btn-cta btn-cta-github">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ===== FOOTER ===== -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-social">
-                <a href="https://github.com/afaq-codes" target="_blank" rel="noopener" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/afaq-springboot-angular" target="_blank" rel="noopener" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://wa.me/923021005535" target="_blank" rel="noopener" title="WhatsApp: 0302 1005535"><i class="fab fa-whatsapp"></i></a>
-                <a href="mailto:afaqch5535@gmail.com" title="Email"><i class="fas fa-envelope"></i></a>
-            </div>
-            <p class="mb-0"><strong>Muhammad Afaq</strong> &mdash; Full-Stack Java &amp; Angular Developer &mdash; &copy; 2026</p>
-        </div>
-    </footer>
+    <div id="site-footer"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="site-nav.js"></script>
+    <script src="site-marquee.js"></script>
+    <script src="sticky-social.js"></script>
+    <script src="site-footer.js"></script>
 </body>
 </html>

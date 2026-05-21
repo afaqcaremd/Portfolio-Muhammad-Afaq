@@ -8,10 +8,15 @@
     })(window,document,'script','dataLayer','GTM-59XXTKP9');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CareMD — Platform Demo | Muhammad Afaq</title>
+    <title>CareMD Platform Demo | Muhammad Afaq</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="site-nav.css" rel="stylesheet">
+    <link href="typography.css" rel="stylesheet">
+    <link href="sticky-social.css" rel="stylesheet">
+    <link href="site-buttons.css" rel="stylesheet">
+    <link href="site-marquee.css" rel="stylesheet">
+    <link href="site-footer.css" rel="stylesheet">
     <style>
         :root {
             --primary: #0066cc;
@@ -28,7 +33,8 @@
             --muted: #64748b;
             --border: #e2e8f0;
         }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+        html, body { overflow-x: hidden; max-width: 100vw; }
+        body { background: var(--bg); color: var(--text); }
         .top-nav {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             box-shadow: 0 2px 16px rgba(0,0,0,0.12);
@@ -46,39 +52,56 @@
         .hero-stats { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.75rem; }
         .hero-stat-num { font-size: 1.75rem; font-weight: 800; color: #93c5fd; }
         .hero-stat-lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.55); font-weight: 600; }
+        .demo-nav-section {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0 1.25rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
         .app-tabs {
             display: flex;
             flex-wrap: wrap;
             gap: 0.5rem;
             justify-content: center;
-            padding: 1.25rem 0 0;
         }
         .app-tab {
-            border: 2px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.08);
-            color: rgba(255,255,255,0.85);
-            padding: 0.55rem 1.1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            padding: 0.55rem 1rem;
+            border-radius: 10px;
+            font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
+            white-space: nowrap;
         }
         .app-tab:hover, .app-tab.active {
-            background: white;
-            color: var(--text);
-            border-color: white;
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
         }
-        .app-tab[data-app="clinical"].active { color: var(--clinical); }
-        .app-tab[data-app="hr"].active { color: var(--hr); }
-        .app-tab[data-app="assets"].active { color: var(--assets); }
-        .app-tab[data-app="access"].active { color: var(--access); }
-        .app-tab[data-app="reports"].active { color: var(--reports); }
-        .app-tab[data-app="notifications"].active { color: var(--notify); }
-        .main-wrap { padding: 2rem 0 4rem; }
+        .app-tab[data-app="clinical"].active { background: var(--clinical); border-color: var(--clinical); }
+        .app-tab[data-app="hr"].active { background: var(--hr); border-color: var(--hr); }
+        .app-tab[data-app="assets"].active { background: var(--assets); border-color: var(--assets); }
+        .app-tab[data-app="access"].active { background: var(--access); border-color: var(--access); }
+        .app-tab[data-app="reports"].active { background: var(--reports); border-color: var(--reports); }
+        .app-tab[data-app="notifications"].active { background: var(--notify); border-color: var(--notify); }
+        .main-wrap { padding: 1.5rem 0 4rem; }
+        .demo-viewport {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.25rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+            min-height: 200px;
+        }
         .panel { display: none; animation: fadeIn 0.3s ease; }
         .panel.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
@@ -172,33 +195,43 @@
         .arch-item i { font-size: 1.5rem; color: var(--primary); margin-bottom: 0.5rem; }
         .arch-item strong { display: block; font-size: 0.85rem; }
         .arch-item span { font-size: 0.75rem; color: var(--muted); }
-        .stack-footer {
-            text-align: center;
-            padding: 1.5rem;
-            font-size: 0.8rem;
-            color: var(--muted);
+        @media (max-width: 768px) {
+            .hero-demo { padding: 2.25rem 0 2rem; }
+            .hero-demo h1 { font-size: 1.45rem; }
+            .hero-stats { gap: 1.25rem; }
+            .demo-nav-section { padding: 0.85rem 0; }
+            .app-tabs {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 0.35rem;
+                scrollbar-width: none;
+            }
+            .app-tabs::-webkit-scrollbar { display: none; }
+            .demo-viewport {
+                border-width: 2px;
+                border-radius: 16px;
+                padding: 1rem;
+                box-shadow: inset 0 0 0 1px rgba(0,102,204,0.08), 0 10px 28px rgba(0,0,0,0.08);
+            }
+            .module-grid { grid-template-columns: 1fr; }
+            .panel-header { flex-direction: column; }
+            .arch-cols { grid-template-columns: 1fr 1fr; }
         }
-        .stack-footer a { color: var(--primary); font-weight: 600; text-decoration: none; }
     </style>
 </head>
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59XXTKP9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-    <nav class="top-nav navbar navbar-expand-lg navbar-dark">
-        <div class="container">
-            <a class="navbar-brand brand" href="#"><i class="fas fa-hospital me-2"></i>CareMD Platform Demo</a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="index.html"><i class="fas fa-arrow-left me-1"></i> Back to Portfolio</a>
-            </div>
-        </div>
-    </nav>
+    <div id="site-nav"></div>
 
     <section class="hero-demo text-center">
         <div class="container">
-            <h1><i class="fas fa-hospital-alt me-2"></i>CareMD — Medical Practice Management</h1>
+            <h1><i class="fas fa-hospital-alt me-2"></i>CareMD Medical Practice Management</h1>
             <p>
-                Multi-tenant SaaS platform for medical billing, revenue cycle management (RCM), HR operations, asset tracking, and practice administration.
-                Built as primary developer — Spring Boot 3.2 backend, Angular 14 SPA, PostgreSQL with Flyway migrations.
+                Multi tenant SaaS for medical billing, revenue cycle management, HR, assets, and practice administration.
+                Built as primary developer with Spring Boot 3.2, Angular 14, and PostgreSQL with Flyway migrations.
             </p>
             <div class="hero-stats">
                 <div><div class="hero-stat-num">58+</div><div class="hero-stat-lbl">Domain Entities</div></div>
@@ -206,6 +239,11 @@
                 <div><div class="hero-stat-num">34+</div><div class="hero-stat-lbl">REST Controllers</div></div>
                 <div><div class="hero-stat-num">6</div><div class="hero-stat-lbl">App Modules</div></div>
             </div>
+        </div>
+    </section>
+
+    <section class="demo-nav-section">
+        <div class="container">
             <div class="app-tabs" role="tablist">
                 <button type="button" class="app-tab active" data-app="clinical" data-panel="panel-clinical"><i class="fas fa-file-medical"></i> Billing / Clinical</button>
                 <button type="button" class="app-tab" data-app="hr" data-panel="panel-hr"><i class="fas fa-users"></i> HR / Operations</button>
@@ -218,6 +256,7 @@
     </section>
 
     <div class="container main-wrap">
+        <div class="demo-viewport">
 
         <!-- CLINICAL / BILLING -->
         <div id="panel-clinical" class="panel active">
@@ -267,7 +306,7 @@
                 <div class="module-card">
                     <div class="module-card-head" style="color:var(--clinical)"><i class="fas fa-file-invoice"></i><h6>Claims</h6></div>
                     <div class="module-card-body">
-                        <ul><li>Full claim lifecycle — new, update, view, list</li><li>Claim status workflow and action audit trail</li><li>Claims import and CPT code import</li><li>Advanced search with JPA Specifications</li></ul>
+                        <ul><li>Full claim lifecycle: new, update, view, list</li><li>Claim status workflow and action audit trail</li><li>Claims import and CPT code import</li><li>Advanced search with JPA Specifications</li></ul>
                         <div class="tag-row"><span class="feat-tag">RCM Core</span><span class="feat-tag">ClaimStatus</span><span class="feat-tag">RefCpt</span></div>
                     </div>
                 </div>
@@ -293,7 +332,7 @@
                     </div>
                 </div>
                 <div class="module-card">
-                    <div class="module-card-head" style="color:var(--clinical)"><i class="fas fa-sliders"></i><h6>Setup — Claim Flags</h6></div>
+                    <div class="module-card-head" style="color:var(--clinical)"><i class="fas fa-sliders"></i><h6>Setup, Claim Flags</h6></div>
                     <div class="module-card-body">
                         <ul><li>Admin configuration for claim flag types</li><li>CRUD for flag definitions used across claims</li><li>Metadata endpoint with PreAuthorize alignment</li></ul>
                         <div class="tag-row"><span class="feat-tag">Reference Data</span></div>
@@ -301,7 +340,7 @@
                 </div>
             </div>
             <div class="mock-section">
-                <h5><i class="fas fa-table me-2 text-primary"></i>Sample — Claims List (mock data)</h5>
+                <h5><i class="fas fa-table me-2 text-primary"></i>Sample Claims List (mock data)</h5>
                 <div class="table-responsive">
                     <table class="table table-hover mock-table mb-0">
                         <thead><tr><th>Claim #</th><th>Patient</th><th>Practice</th><th>Payer</th><th>Charges</th><th>Status</th><th>DOS</th></tr></thead>
@@ -385,7 +424,7 @@
                 <div class="module-card">
                     <div class="module-card-head" style="color:var(--hr)"><i class="fas fa-user-plus"></i><h6>Recruiting</h6></div>
                     <div class="module-card-body">
-                        <ul><li>Meta hiring leads — campaign-sourced candidates</li><li>Hiring clone — duplicate lead management</li><li>Custom hiring — manual lead entry</li><li>Status dialog for hiring pipeline stages</li></ul>
+                        <ul><li>Meta hiring leads from campaigns</li><li>Hiring clone for duplicate lead management</li><li>Custom hiring with manual lead entry</li><li>Status dialog for hiring pipeline stages</li></ul>
                         <div class="tag-row"><span class="feat-tag">MetaHiringLead</span><span class="feat-tag">CustomHiringLead</span></div>
                     </div>
                 </div>
@@ -398,7 +437,7 @@
                 <div class="panel-icon assets"><i class="fas fa-boxes-stacked"></i></div>
                 <div>
                     <h2 class="panel-title">Assets</h2>
-                    <p class="panel-desc">IT and office asset inventory management — track hardware, assignments to employees, categories, and summary dashboards.</p>
+                    <p class="panel-desc">IT and office asset inventory management to track hardware, employee assignments, categories, and summary dashboards.</p>
                 </div>
             </div>
             <div class="module-grid">
@@ -411,7 +450,7 @@
                 <div class="module-card">
                     <div class="module-card-head" style="color:var(--assets)"><i class="fas fa-laptop"></i><h6>Inventory</h6></div>
                     <div class="module-card-body">
-                        <ul><li>Asset CRUD — serial numbers, purchase date, condition</li><li>Search and filter with ngx-datatable</li><li>Asset view with assignment history</li></ul>
+                        <ul><li>Asset CRUD with serial numbers, purchase date, and condition</li><li>Search and filter with ngx-datatable</li><li>Asset view with assignment history</li></ul>
                         <div class="tag-row"><span class="feat-tag">Asset</span></div>
                     </div>
                 </div>
@@ -438,7 +477,7 @@
                 <div class="panel-icon access"><i class="fas fa-shield-halved"></i></div>
                 <div>
                     <h2 class="panel-title">Access &amp; Administration</h2>
-                    <p class="panel-desc">Multi-tenant identity and authorization — users, roles, feature packages, tenant management, and real-time in-app messaging via WebSocket/STOMP.</p>
+                    <p class="panel-desc">Multi tenant identity and authorization for users, roles, feature packages, tenant management, and real time in app messaging via WebSocket/STOMP.</p>
                 </div>
             </div>
             <div class="module-grid">
@@ -485,7 +524,7 @@
                 <div class="panel-icon reports"><i class="fas fa-chart-pie"></i></div>
                 <div>
                     <h2 class="panel-title">Reports &amp; Analytics</h2>
-                    <p class="panel-desc">Unified reports hub with role-filtered sections — clinical RCM analytics, HR attendance and payroll reports, and user activity audit logs.</p>
+                    <p class="panel-desc">Unified reports hub with role filtered sections for clinical RCM analytics, HR attendance and payroll reports, and user activity audit logs.</p>
                 </div>
             </div>
             <div class="module-grid">
@@ -517,7 +556,7 @@
                 <div class="panel-icon notifications"><i class="fas fa-bell"></i></div>
                 <div>
                     <h2 class="panel-title">Notifications</h2>
-                    <p class="panel-desc">System-wide notification center — alerts for claim updates, approvals, assignments, and platform events delivered to users in real time.</p>
+                    <p class="panel-desc">System wide notification center with alerts for claim updates, approvals, assignments, and platform events delivered in real time.</p>
                 </div>
             </div>
             <div class="module-grid">
@@ -529,6 +568,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+
         </div>
 
         <!-- ARCHITECTURE -->
@@ -543,22 +584,24 @@
                 <div class="arch-item"><i class="fas fa-cloud d-block"></i><strong>Deployment</strong><span>Docker · GitLab CI · Dual brand builds</span></div>
             </div>
         </div>
-
-        <p class="stack-footer">
-            Portfolio demo — illustrative UI only. <a href="index.html">Return to portfolio</a>
-        </p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="site-nav.js"></script>
+    <script src="site-marquee.js"></script>
+    <div id="site-footer"></div>
+
+    <script src="sticky-social.js"></script>
+    <script src="site-footer.js"></script>
     <script>
         document.querySelectorAll('.app-tab').forEach(function(tab) {
             tab.addEventListener('click', function() {
-                var app = this.getAttribute('data-app');
                 var panelId = this.getAttribute('data-panel');
                 document.querySelectorAll('.app-tab').forEach(function(t) { t.classList.remove('active'); });
-                document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+                document.querySelectorAll('.demo-viewport .panel').forEach(function(p) { p.classList.remove('active'); });
                 this.classList.add('active');
-                document.getElementById(panelId).classList.add('active');
+                var panel = document.getElementById(panelId);
+                if (panel) panel.classList.add('active');
             });
         });
     </script>

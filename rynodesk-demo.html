@@ -8,10 +8,15 @@
     })(window,document,'script','dataLayer','GTM-59XXTKP9');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RynoDesk — POS &amp; E-commerce Demo</title>
+    <title>RynoDesk POS and E commerce Demo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="site-nav.css" rel="stylesheet">
+    <link href="typography.css" rel="stylesheet">
+    <link href="sticky-social.css" rel="stylesheet">
+    <link href="site-buttons.css" rel="stylesheet">
+    <link href="site-marquee.css" rel="stylesheet">
+    <link href="site-footer.css" rel="stylesheet">
     <style>
         :root {
             --primary: #e85d04;
@@ -30,7 +35,8 @@
             --muted: #64748b;
             --border: #fed7aa;
         }
-        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); }
+        html, body { overflow-x: hidden; max-width: 100vw; }
+        body { background: var(--bg); color: var(--text); }
         .top-nav {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             box-shadow: 0 2px 16px rgba(0,0,0,0.12);
@@ -49,13 +55,22 @@
         .hero-stats { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-top: 1.5rem; }
         .hero-stat-num { font-size: 1.75rem; font-weight: 800; color: #fdba74; }
         .hero-stat-lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.5); font-weight: 600; }
-        .app-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; padding: 1.25rem 0 0; }
+        .demo-nav-section {
+            background: white;
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 0 1.25rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        .app-tabs { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; }
         .app-tab {
-            border: 2px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.08);
-            color: rgba(255,255,255,0.9);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            padding: 0.5rem 0.95rem;
+            border-radius: 10px;
             font-size: 0.78rem;
             font-weight: 600;
             cursor: pointer;
@@ -63,9 +78,22 @@
             display: inline-flex;
             align-items: center;
             gap: 0.35rem;
+            white-space: nowrap;
         }
-        .app-tab:hover, .app-tab.active { background: white; color: var(--text); border-color: white; }
-        .main-wrap { padding: 2rem 0 4rem; }
+        .app-tab:hover, .app-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        .main-wrap { padding: 1.5rem 0 4rem; }
+        .demo-viewport {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 1.25rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.06);
+            min-height: 200px;
+        }
         .panel { display: none; animation: fadeIn 0.25s ease; }
         .panel.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -132,7 +160,28 @@
             gap: 1rem;
             margin-top: 1.5rem;
         }
-        @media (max-width: 768px) { .visual-row { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) {
+            .visual-row { grid-template-columns: 1fr; }
+            .hero-demo { padding: 2.25rem 0 2rem; }
+            .hero-demo h1 { font-size: 1.45rem; }
+            .app-tabs {
+                flex-wrap: nowrap;
+                justify-content: flex-start;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 0.35rem;
+                scrollbar-width: none;
+            }
+            .app-tabs::-webkit-scrollbar { display: none; }
+            .demo-viewport {
+                border-width: 2px;
+                border-radius: 16px;
+                padding: 1rem;
+                box-shadow: inset 0 0 0 1px rgba(232,93,4,0.1), 0 10px 28px rgba(0,0,0,0.08);
+            }
+            .flow-steps { justify-content: flex-start; }
+            .flow-arrow { display: none; }
+        }
         .visual-box {
             background: var(--card);
             border: 1px solid var(--border);
@@ -171,31 +220,27 @@
             font-weight: 600;
         }
         .stack-pill i { color: var(--primary); margin-right: 0.35rem; }
-        .stack-footer { text-align: center; padding: 1.5rem; font-size: 0.8rem; color: var(--muted); }
-        .stack-footer a { color: var(--primary); font-weight: 600; text-decoration: none; }
     </style>
 </head>
 <body>
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-59XXTKP9" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
-    <nav class="top-nav navbar navbar-dark">
-        <div class="container">
-            <a class="navbar-brand brand" href="#"><i class="fas fa-cash-register me-2"></i>RynoDesk</a>
-            <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="index.html"><i class="fas fa-arrow-left me-1"></i> Portfolio</a>
-            </div>
-        </div>
-    </nav>
+    <div id="site-nav"></div>
 
     <section class="hero-demo">
         <div class="container">
             <h1><i class="fas fa-store me-2"></i>RynoDesk</h1>
-            <p>Retail POS &amp; e-commerce platform — module overview (portfolio preview).</p>
+            <p>Retail POS and e commerce platform. Module overview for portfolio preview.</p>
             <div class="hero-stats">
                 <div><div class="hero-stat-num">8</div><div class="hero-stat-lbl">Areas</div></div>
                 <div><div class="hero-stat-num">POS</div><div class="hero-stat-lbl">Desktop</div></div>
                 <div><div class="hero-stat-num">Web</div><div class="hero-stat-lbl">App</div></div>
             </div>
+        </div>
+    </section>
+
+    <section class="demo-nav-section">
+        <div class="container">
             <div class="app-tabs">
                 <button type="button" class="app-tab active" data-panel="panel-flow"><i class="fas fa-diagram-project"></i> Flow</button>
                 <button type="button" class="app-tab" data-panel="panel-sales"><i class="fas fa-cart-shopping"></i> Sales</button>
@@ -203,13 +248,14 @@
                 <button type="button" class="app-tab" data-panel="panel-inventory"><i class="fas fa-warehouse"></i> Inventory</button>
                 <button type="button" class="app-tab" data-panel="panel-integration"><i class="fas fa-plug"></i> Integrations</button>
                 <button type="button" class="app-tab" data-panel="panel-finance"><i class="fas fa-coins"></i> Finance</button>
-                <button type="button" class="app-tab" data-panel="panel-crm-access"><i class="fas fa-users"></i> CRM &amp; Access</button>
+                <button type="button" class="app-tab" data-panel="panel-crm-access"><i class="fas fa-users"></i> CRM and Access</button>
                 <button type="button" class="app-tab" data-panel="panel-reports"><i class="fas fa-chart-line"></i> Reports</button>
             </div>
         </div>
     </section>
 
     <div class="container main-wrap">
+        <div class="demo-viewport">
 
         <div id="panel-flow" class="panel active">
             <div class="flow-bar">
@@ -231,9 +277,9 @@
             <div class="visual-row">
                 <div class="visual-box">
                     <h6><i class="fas fa-receipt me-2"></i>POS View</h6>
-                    <div class="pos-line"><span>Item A</span><span>—</span></div>
-                    <div class="pos-line"><span>Item B</span><span>—</span></div>
-                    <div class="pos-line"><span>Discount</span><span>—</span></div>
+                    <div class="pos-line"><span>Item A</span><span>Rs 1,200</span></div>
+                    <div class="pos-line"><span>Item B</span><span>Rs 850</span></div>
+                    <div class="pos-line"><span>Discount</span><span>Rs 50</span></div>
                     <div class="pos-total text-end">Total</div>
                 </div>
                 <div class="visual-box">
@@ -360,23 +406,29 @@
             </div>
         </div>
 
+        </div>
+
         <div class="stack-row">
             <span class="stack-pill"><i class="fas fa-server"></i> Spring Boot</span>
             <span class="stack-pill"><i class="fas fa-laptop-code"></i> Angular</span>
             <span class="stack-pill"><i class="fas fa-database"></i> PostgreSQL</span>
             <span class="stack-pill"><i class="fas fa-desktop"></i> Electron</span>
         </div>
-
-        <p class="stack-footer">Portfolio preview only. <a href="index.html">Return to portfolio</a></p>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="site-nav.js"></script>
+    <script src="site-marquee.js"></script>
+    <div id="site-footer"></div>
+
+    <script src="sticky-social.js"></script>
+    <script src="site-footer.js"></script>
     <script>
         document.querySelectorAll('.app-tab').forEach(function(tab) {
             tab.addEventListener('click', function() {
                 var panelId = this.getAttribute('data-panel');
                 document.querySelectorAll('.app-tab').forEach(function(t) { t.classList.remove('active'); });
-                document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+                document.querySelectorAll('.demo-viewport .panel').forEach(function(p) { p.classList.remove('active'); });
                 this.classList.add('active');
                 document.getElementById(panelId).classList.add('active');
             });
